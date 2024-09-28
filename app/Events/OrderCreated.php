@@ -40,8 +40,8 @@ class OrderCreated implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'order_id' => $this->order->id,
-            'message' => 'Your order has been created!',
+            'title' => 'New Order',
+            'message' => 'A new order has been created with ID: ' . $this->order->id,
         ];
     }
 }

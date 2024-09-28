@@ -3,12 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\PanelProvider;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -25,6 +27,10 @@ class User extends Authenticatable
         'is_admin'
     ];
 
+    public function isAdmin()
+    {
+        return $this->is_admin; // Assumes you have an is_admin boolean column in your users table
+    }
     public function carts(){
         return $this->hasMany(Cart::class);
     }
@@ -33,6 +39,10 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function canAccessPanel(Panel|\Filament\Panel $panel): bool
+    {
+        return str_ends_with($this->email, '@admin.com');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

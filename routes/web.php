@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*

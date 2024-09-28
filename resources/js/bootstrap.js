@@ -35,5 +35,5 @@ window.Echo.private(`user.${userId}`) // `userId` should be the ID of the authen
     .listen('OrderCreatedEvent', (e) => {
         console.log('Order created:', e);
         // Here, you can display a notification to the user
-        alert(`New order created! Order ID: ${e.order_id}. Message: ${e.message}`);
+        alert(`New order created! Order ID: ${e.title}. Message: ${e.message}`);
     });
