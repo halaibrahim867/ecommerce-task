@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,5 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::put('cart/{productId}/increment', [CartController::class, 'incrementCartItem']);
     Route::put('cart/{cartProduct}/decrement', [CartController::class, 'decrementCartItem']);
 
+    Route::post('/order/create',[OrderController::class,'store']);
 });
