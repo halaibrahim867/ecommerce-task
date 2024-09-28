@@ -30,3 +30,10 @@ window.Echo = new Echo({
     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
 });
+
+window.Echo.private(`user.${userId}`) // `userId` should be the ID of the authenticated user
+    .listen('OrderCreatedEvent', (e) => {
+        console.log('Order created:', e);
+        // Here, you can display a notification to the user
+        alert(`New order created! Order ID: ${e.order_id}. Message: ${e.message}`);
+    });
